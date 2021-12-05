@@ -18,7 +18,7 @@ import { News } from './entities/news.entity';
 import { NewsService } from './news.service';
 
 @UseInterceptors(ClassSerializerInterceptor)
-@Controller('system-news')
+@Controller('news')
 export class NewsController {
     constructor(private readonly newsService: NewsService) {}
 

@@ -5,6 +5,7 @@ import { join } from 'path';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { DiaryModule } from './diary/diary.module';
 import { NewsModule } from './news/news.module';
 import { UserModule } from './user/user.module';
 
@@ -23,7 +24,8 @@ import { UserModule } from './user/user.module';
       synchronize: true,
     }),
     UserModule,
-    NewsModule
+    NewsModule,
+    DiaryModule
   ],
   controllers: [AppController],
   providers: [AppService],
