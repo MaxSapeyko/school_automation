@@ -3,7 +3,7 @@ import { Role } from 'src/core/enums/roles.enum';
 
 export class CreateUserDto {
     @IsNotEmpty()
-    firstname: string;
+    name: string;
 
     @IsNotEmpty()
     lastname: string;

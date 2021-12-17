@@ -1,7 +1,7 @@
 export class AuthUserDto {
     id: string;
     email: string;
-    firstname: string;
+    name: string;
     lastname: string;
     role: string;
 }

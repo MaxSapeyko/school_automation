@@ -18,7 +18,7 @@ export class AuthService {
             if (compareResult) {
                 return <AuthUserDto>{
                     email: user.email,
-                    firstname: user.firstname,
+                    name: user.name,
                     lastname: user.lastname,
                     id: user.id,
                     role: user.role,
