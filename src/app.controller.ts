@@ -11,10 +11,10 @@ export class AppController {
     private authService: AuthService,
 ) {}
 
-  @UseGuards(LocalAuthGuard)
+  // @UseGuards(LocalAuthGuard)
     @Post('auth/login')
     async login(@Request() req) {
-        return this.authService.login(req.user);
+        return this.authService.login(req.body);
     }
 
     @UseGuards(JwtAuthGuard)
