@@ -42,7 +42,7 @@ export class UserService {
                 'User with specified email already exists',
             );
         }
-        const password = await bcrypt.hash(user.password, 10);
+        const password: string = await bcrypt.hash(user.password, 10);
         let newUser = await this.userRepository.create({
             ...user,
             password,
