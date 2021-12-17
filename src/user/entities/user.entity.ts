@@ -1,6 +1,7 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, OneToOne } from 'typeorm';
 import { BaseEntity } from '../../core/entities/base.entity';
 import { Exclude } from 'class-transformer';
+import { Diary } from 'src/diary/entities/diary.entity';
 
 @Entity({ name: 'user' })
 export class User extends BaseEntity {
@@ -25,4 +26,7 @@ export class User extends BaseEntity {
 
     @Column({ type: 'varchar', length: '200', nullable: true })
     lastname: string;
+
+    @OneToOne((type) => Diary, (diary) => diary.id)
+    dairyId: string;
 }
