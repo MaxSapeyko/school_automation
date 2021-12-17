@@ -56,7 +56,7 @@ export class User extends BaseEntity {
     universityAddress: string;
     
     @Column({ type: 'varchar', length: '20', nullable: true })
-    sex: Sex;
+    sex: 'man' | 'woman';
 
     @Column({ type: 'timestamptz',
         default: () => 'CURRENT_TIMESTAMP', })
