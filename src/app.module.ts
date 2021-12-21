@@ -24,8 +24,8 @@ import { UserModule } from './user/user.module';
       ssl: process.env.NODE_ENV === 'production',
       synchronize: true,
     }),
-    AuthModule,
     UserModule,
+    AuthModule,
     NewsModule,
     DiaryModule
   ],
