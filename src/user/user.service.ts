@@ -51,4 +51,10 @@ export class UserService {
         return newUser;
     }
 
+    async remove(id: string) {
+        const user = await this.userRepository.findOneOrFail(id);
+
+        return await this.userRepository.remove(user);
+    }
+
 }

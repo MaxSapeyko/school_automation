@@ -11,6 +11,7 @@ import {
     ClassSerializerInterceptor,
     UseInterceptors,
     NotFoundException,
+    Delete,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/core/guards/jwt-auth.guard';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -55,4 +56,15 @@ export class UserController {
         }
         return user;
     }
+
+    @Delete(':id')
+    @UseGuards(JwtAuthGuard)
+    async delete(@Param() id: string): Promise<User> {
+        const user = await this.userService.remove(id);
+        if (!user) {
+            throw new NotFoundException();
+        }
+        return user;
+    }
+
 }
