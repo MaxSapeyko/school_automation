@@ -33,6 +33,18 @@ export class User extends BaseEntity {
 
     @Column({ type: 'varchar', length: '200', nullable: true })
     phone: string;
+
+    @Column({ type: 'varchar', length: '200', nullable: true })
+    parentName: string;
+
+    @Column({ type: 'varchar', length: '200', nullable: true })
+    parentLastname: string;
+    
+    @Column({ type: 'varchar', length: '200', nullable: true })
+    parentSurname: string;
+
+    @Column({ type: 'varchar', length: '200', nullable: true })
+    parentPhone: string;
     
     @Column({ type: 'varchar', length: '10', nullable: true })
     class: string;

@@ -35,7 +35,7 @@ export class AuthService {
       throw new UnauthorizedException();
     }
 
-    const payload = user;
+    const payload = userResponse;
 
     return {
       access_token: this.jwtService.sign(payload),

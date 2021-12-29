@@ -6,7 +6,6 @@ import {
     Request,
     Param,
     Post,
-    Put,
     UseGuards,
     ClassSerializerInterceptor,
     UseInterceptors,
@@ -66,5 +65,4 @@ export class UserController {
         }
         return user;
     }
-
 }
