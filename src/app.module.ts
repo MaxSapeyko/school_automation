@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { DiaryModule } from './diary/diary.module';
 import { NewsModule } from './news/news.module';
+import { SubjectsModule } from './subject/subjects.module';
 import { UserModule } from './user/user.module';
 
 @Module({
@@ -28,6 +29,7 @@ import { UserModule } from './user/user.module';
     UserModule,
     AuthModule,
     NewsModule,
+    SubjectsModule,
     DiaryModule
   ],
   controllers: [AppController],
