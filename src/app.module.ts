@@ -26,6 +26,7 @@ import { UserModule } from './user/user.module';
     }),
     AuthModule,
     UserModule,
+    AuthModule,
     NewsModule,
     DiaryModule
   ],

@@ -6,11 +6,11 @@ import {
     Request,
     Param,
     Post,
-    Put,
     UseGuards,
     ClassSerializerInterceptor,
     UseInterceptors,
     NotFoundException,
+    Delete,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/core/guards/jwt-auth.guard';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -50,6 +50,16 @@ export class UserController {
     @UseGuards(JwtAuthGuard)
     async get(@Param() id: string): Promise<User> {
         const user = await this.userService.get(id);
+        if (!user) {
+            throw new NotFoundException();
+        }
+        return user;
+    }
+
+    @Delete(':id')
+    @UseGuards(JwtAuthGuard)
+    async delete(@Param() id: string): Promise<User> {
+        const user = await this.userService.remove(id);
         if (!user) {
             throw new NotFoundException();
         }
