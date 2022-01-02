@@ -13,7 +13,7 @@ export class Subjects extends BaseEntity {
     @Column({ type: 'varchar', length: '200', nullable: false, default: 'Default Title' })
     title: string;
 
-    @Column({ type: 'varchar', nullable: true, array: false })
+    @Column({ type: 'varchar', nullable: true, array: true })
     classes: string[];
 
     @ManyToMany((type) => User, (user) => user.subjectId)
