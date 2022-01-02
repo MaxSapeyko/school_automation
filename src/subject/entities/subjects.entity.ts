@@ -16,6 +16,6 @@ export class Subjects extends BaseEntity {
     @Column({ type: 'varchar', nullable: true, array: true })
     classes: string[];
 
-    @ManyToMany((type) => User, (user) => user.subjectId)
+    @ManyToMany((type) => User, (user) => user.subjects)
     users: User[];
 }

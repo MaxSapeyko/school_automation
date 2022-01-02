@@ -79,7 +79,7 @@ export class User extends BaseEntity {
     @OneToOne((type) => Diary, (diary) => diary.id)
     dairyId: string;
 
-    @ManyToMany((type) => Subjects, (subject) => subject.id)
+    @ManyToMany((type) => Subjects, (subject) => subject.users)
     @JoinTable()
-    subjectId: Subjects[];
+    subjects: Subjects[];
 }

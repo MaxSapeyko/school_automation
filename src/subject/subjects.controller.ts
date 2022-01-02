@@ -11,6 +11,7 @@ import {
     ClassSerializerInterceptor,
     UseInterceptors,
     NotFoundException,
+    Delete,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/core/guards/jwt-auth.guard';
 import { CreateSubjectsDto } from './dto/create-subject.dto';
@@ -39,6 +40,16 @@ export class SubjectsController {
     @UseGuards(JwtAuthGuard)
     async get(@Param() id: string): Promise<Subjects> {
         const subjects = await this.subjectsService.findOne(id);
+        if (!subjects) {
+            throw new NotFoundException();
+        }
+        return subjects;
+    }
+
+    @Delete(':id')
+    @UseGuards(JwtAuthGuard)
+    async delete(@Param() param: any): Promise<Subjects> {
+        const subjects = await this.subjectsService.findOne(param.id);
         if (!subjects) {
             throw new NotFoundException();
         }
