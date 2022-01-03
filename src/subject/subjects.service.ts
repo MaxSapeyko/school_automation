@@ -21,6 +21,7 @@ export class SubjectsService {
             where: {
                 id: id,
             },
+            relations: ['users'],
         });
     }
 

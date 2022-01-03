@@ -38,8 +38,8 @@ export class SubjectsController {
 
     @Get(':id')
     @UseGuards(JwtAuthGuard)
-    async get(@Param() id: string): Promise<Subjects> {
-        const subjects = await this.subjectsService.findOne(id);
+    async get(@Param() param: any): Promise<Subjects> {
+        const subjects = await this.subjectsService.findOne(param.id);
         if (!subjects) {
             throw new NotFoundException();
         }
