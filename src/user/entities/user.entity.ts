@@ -1,8 +1,10 @@
-import { Entity, Column, OneToOne } from 'typeorm';
+import { Entity, Column, OneToOne, ManyToMany, JoinTable } from 'typeorm';
 import { BaseEntity } from '../../core/entities/base.entity';
 import { Exclude } from 'class-transformer';
 import { Diary } from 'src/diary/entities/diary.entity';
 import { Sex } from 'src/core/enums/sex.enum';
+import { Subjects } from 'src/subject/entities/subjects.entity';
+import { Subject } from 'rxjs';
 
 @Entity({ name: 'user' })
 export class User extends BaseEntity {
@@ -76,4 +78,8 @@ export class User extends BaseEntity {
 
     @OneToOne((type) => Diary, (diary) => diary.id)
     dairyId: string;
+
+    @ManyToMany((type) => Subjects, (subject) => subject.users)
+    @JoinTable()
+    subjects: Subjects[];
 }

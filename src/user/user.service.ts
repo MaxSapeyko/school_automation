@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/create-user.dto';
+import { Subjects } from '../subject/entities/subjects.entity';
 
 @Injectable()
 export class UserService {
@@ -21,6 +22,19 @@ export class UserService {
                 email: email,
             },
         });
+    }
+
+    async updateSubjectOne(userId: string, subject: Subjects): Promise<User | undefined> {
+        return await this.userRepository.findOneOrFail(userId, {
+            relations: ['subjects'],
+        });
+
+        // const user = await this.userRepository.findOneOrFail(userId, {
+        //     relations: ['subjects'],
+        // });
+        // user.subjects.push(subject);
+
+        // return await this.userRepository.save(user);
     }
 
     async findAll(): Promise<User[]> {
