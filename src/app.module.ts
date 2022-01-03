@@ -7,6 +7,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { DiaryModule } from './diary/diary.module';
+import { GradeModule } from './grade/grade.module';
 import { NewsModule } from './news/news.module';
 import { SubjectsModule } from './subject/subjects.module';
 import { UserModule } from './user/user.module';
@@ -30,6 +31,7 @@ import { UserModule } from './user/user.module';
     AuthModule,
     NewsModule,
     SubjectsModule,
+    GradeModule,
     DiaryModule
   ],
   controllers: [AppController],
