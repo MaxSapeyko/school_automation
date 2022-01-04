@@ -5,7 +5,7 @@ export class CreateGradeDto {
     grade: number;
 
     @IsDate()
-    data: Date;
+    date: Date;
 
     @IsNotEmpty()
     userId: string;
