@@ -7,6 +7,7 @@ import { Subjects } from './entities/subjects.entity';
 import { CreateSubjectsDto } from './dto/create-subject.dto';
 import { User } from 'src/user/entities/user.entity';
 import { UserService } from 'src/user/user.service';
+import { Grade } from 'src/grade/entities/grade.entity';
 
 @Injectable()
 export class SubjectsService {
@@ -23,6 +24,14 @@ export class SubjectsService {
             },
             relations: ['users'],
         });
+    }
+
+    async updateGradeOne(subjectId: string, grade: Grade): Promise<Subjects | undefined> {
+        const subject = await this.subjectsRepository.findOneOrFail(subjectId);
+
+        subject.grades ? subject.grades.push(grade) : subject.grades = [grade];
+        
+        return await this.subjectsRepository.save(subject);
     }
 
     async findAll(): Promise<Subjects[]> {

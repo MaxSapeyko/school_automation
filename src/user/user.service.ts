@@ -8,6 +8,7 @@ import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Subjects } from '../subject/entities/subjects.entity';
+import { Grade } from 'src/grade/entities/grade.entity';
 
 @Injectable()
 export class UserService {
@@ -22,6 +23,22 @@ export class UserService {
                 email: email,
             },
         });
+    }
+    
+    async findOneById(id: string): Promise<User | undefined> {
+        return this.userRepository.findOne({
+            where: {
+                id: id,
+            },
+        });
+    }
+
+     async updateGradeOne(userId: string, grade: Grade): Promise<User | undefined> {
+        const user = await this.userRepository.findOneOrFail(userId);
+
+        user.grades ? user.grades.push(grade) : user.grades = [grade];
+
+        return await this.userRepository.save(user);
     }
 
     async updateSubjectOne(userId: string, subject: Subjects): Promise<User | undefined> {
@@ -38,7 +55,7 @@ export class UserService {
     }
 
     async findAll(): Promise<User[]> {
-        return this.userRepository.find();
+        return this.userRepository.find({relations: ['grades']});
     }
 
     async get(id: string): Promise<User> {
