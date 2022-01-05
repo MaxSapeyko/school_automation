@@ -1,5 +1,5 @@
 import {
-    Injectable,
+    Injectable, NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -7,6 +7,7 @@ import { Grade } from './entities/grade.entity';
 import { CreateGradeDto } from './dto/create-grade.dto';
 import { User } from 'src/user/entities/user.entity';
 import { UserService } from 'src/user/user.service';
+import { SubjectsService } from 'src/subject/subjects.service';
 
 @Injectable()
 export class GradeService {
@@ -14,6 +15,7 @@ export class GradeService {
         @InjectRepository(Grade)
         private readonly gradeRepository: Repository<Grade>,
         private readonly userService: UserService,
+        private readonly subjectService: SubjectsService,
     ) {}
 
     async findOne(id: string): Promise<Grade | undefined> {
@@ -26,19 +28,33 @@ export class GradeService {
     }
 
     async findAll(): Promise<Grade[]> {
-        return this.gradeRepository.find({ relations: ['users'],});
+        return this.gradeRepository.find({ relations: [ 'subject', 'user'],});
     }
 
     async create(grade: CreateGradeDto ): Promise<Grade> {
         const newGrade = await this.gradeRepository.create({
             ...grade,
         });
+        const user = await this.userService.findOneById(grade.userId);
+        const subject = await this.subjectService.findOne(grade.subjectId);
+        // const user = await this.userService.updateGradeOne(grade.userId, newGrade)
+        //     const subject = await this.subjectService.updateGradeOne(grade.subjectId, newGrade)
+            
+        if (!user) {
+            throw new NotFoundException('User not found');
+        }
 
-        // const user = await this.userService.updateGradeOne(grade.users[0].id, newGrade);
-        
-        // newGrade.users ? newGrade.users.push(user) : newGrade.users = [user];
 
-        return await this.gradeRepository.save(newGrade);
+        if (!subject){
+            throw new NotFoundException('Subject not found');
+        }
+
+        if (subject && user) {
+            newGrade.subject = subject;
+            newGrade.user = user;
+
+            return await this.gradeRepository.save(newGrade);
+        }
     }
 
       async remove(id: string) {

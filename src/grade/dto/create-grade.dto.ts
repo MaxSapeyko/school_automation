@@ -1,10 +1,10 @@
-import { IsDate, IsNotEmpty } from 'class-validator';
+import { IsDateString, IsNotEmpty } from 'class-validator';
 
 export class CreateGradeDto {
     @IsNotEmpty()
     grade: number;
 
-    @IsDate()
+    @IsDateString()
     date: Date;
 
     @IsNotEmpty()
