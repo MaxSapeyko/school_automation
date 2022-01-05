@@ -55,7 +55,7 @@ export class UserService {
     }
 
     async findAll(): Promise<User[]> {
-        return this.userRepository.find();
+        return this.userRepository.find({relations: ['grades']});
     }
 
     async get(id: string): Promise<User> {

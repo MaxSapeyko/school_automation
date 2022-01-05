@@ -5,7 +5,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Grade } from './entities/grade.entity';
 import { CreateGradeDto } from './dto/create-grade.dto';
-import { User } from 'src/user/entities/user.entity';
 import { UserService } from 'src/user/user.service';
 import { SubjectsService } from 'src/subject/subjects.service';
 
@@ -37,9 +36,8 @@ export class GradeService {
         });
         const user = await this.userService.findOneById(grade.userId);
         const subject = await this.subjectService.findOne(grade.subjectId);
-        // const user = await this.userService.updateGradeOne(grade.userId, newGrade)
-        //     const subject = await this.subjectService.updateGradeOne(grade.subjectId, newGrade)
-            
+        //     const subject = await this.subjectService.updateGradeOne(grade.subjectId, newGrade)            
+
         if (!user) {
             throw new NotFoundException('User not found');
         }
@@ -52,7 +50,10 @@ export class GradeService {
         if (subject && user) {
             newGrade.subject = subject;
             newGrade.user = user;
+            newGrade.userID = user.id;
 
+            // await this.userService.updateGradeOne(grade.userId, newGrade);
+            
             return await this.gradeRepository.save(newGrade);
         }
     }

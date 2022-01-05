@@ -13,6 +13,9 @@ export class Grade extends BaseEntity{
   @Column({type: 'integer', nullable: true})
   grade: number;
 
+  @Column({type: 'varchar', nullable: true})
+  userID: string;
+
   @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP', })
   date: Date;
 
