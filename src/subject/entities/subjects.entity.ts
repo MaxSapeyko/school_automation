@@ -20,6 +20,6 @@ export class Subjects extends BaseEntity {
     @ManyToMany((type) => User, (user) => user.subjects)
     users: User[];
 
-    @OneToMany((type) => Grade, (grade) => grade.subject)
+    @OneToMany((type) => Grade, (grade) => grade.subject, { cascade: true, onDelete: "CASCADE" })
     grades: Grade[];
 }

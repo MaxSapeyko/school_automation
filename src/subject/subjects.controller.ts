@@ -49,7 +49,7 @@ export class SubjectsController {
     @Delete(':id')
     @UseGuards(JwtAuthGuard)
     async delete(@Param() param: any): Promise<Subjects> {
-        const subjects = await this.subjectsService.findOne(param.id);
+        const subjects = await this.subjectsService.remove(param.id);
         if (!subjects) {
             throw new NotFoundException();
         }

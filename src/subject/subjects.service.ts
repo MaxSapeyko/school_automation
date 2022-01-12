@@ -55,6 +55,4 @@ export class SubjectsService {
 
         return await this.subjectsRepository.remove(subject);
     }
-
-
 }
